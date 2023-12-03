@@ -126,7 +126,8 @@ export async function deleteInvoice(id: string) {
 
     try {
         await sql`
-        DELETE FROM invoices
+        UPDATE invoices
+        SET invalid_row = '1' 
         WHERE id = ${id}
     `;
     revalidatePath('/dashboard/invoices');
